@@ -34,10 +34,11 @@ class _landingPageState extends State<landingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+
       //bottom nevigationbar index
       body: _pages[_selectedIndex],
 
-      appBar: AppBar(title: Text('RunRun'),),
 
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedIndex,
