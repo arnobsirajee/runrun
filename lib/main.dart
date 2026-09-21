@@ -5,7 +5,7 @@ import 'package:runrun/application/user_data.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(create: ((context) => DataProvider()),
+    ChangeNotifierProvider(create: ((context) => DataProvider()..loadFromPrefs()),
        child:  const RunRun(),
     ),
       );
