@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:runrun/screen/profile_page.dart';
+import 'package:runrun/screen/BMI_page.dart';
 import 'package:runrun/screen/walking_page.dart';
-
 import 'dailyActivities_page.dart';
 import 'home_page.dart';
 
@@ -27,7 +26,7 @@ class _landingPageState extends State<landingPage> {
     homepage(),
     dailyActivities(),
     walking(),
-    userProfile(),
+    bmi_check(),
 
   ];
 
@@ -56,7 +55,7 @@ class _landingPageState extends State<landingPage> {
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
             BottomNavigationBarItem(icon: Icon(Icons.access_time_outlined), label: "Daily Activity"),
             BottomNavigationBarItem(icon: Icon(Icons.directions_run), label: "Walking"),
-            BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined), label: "Profile"),
+            BottomNavigationBarItem(icon: Icon(Icons.calculate_outlined), label: "BMI"),
 
           ]
       ),
