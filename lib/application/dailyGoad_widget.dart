@@ -24,6 +24,7 @@ class dailyGoad_widget extends StatelessWidget {
             ],
           ),
 
+
           Row(
             children: [
               Icon(Icons.circle,size: 10,color: Colors.deepPurple,),
