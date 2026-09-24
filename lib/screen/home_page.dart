@@ -27,9 +27,9 @@ class _homepageState extends State<homepage> {
         child: Column(
             children:[
 
-              //70% screen
+              //80% screen
               Expanded(
-                  flex: 70,
+                  flex: 80,
                   child: Container(
                     height: 100, width: double.infinity,color: Color(0xfffcf6f0),
                     child: Padding(
@@ -146,7 +146,7 @@ class _homepageState extends State<homepage> {
                                           return const Text('0',
                                             style: TextStyle(fontSize: 16,fontWeight: FontWeight.w700,color: Color(0xff34446f)),);
                                         }
-                                        final int stepsCount = int.tryParse(lastEntry.hours) ?? 0; //convert string to int
+                                        final double stepsCount = double.tryParse(lastEntry.hours) ?? 0; //convert string to int
                                         return Text(
                                           '$stepsCount',
                                           style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Color(0xff34446f)),
@@ -189,13 +189,13 @@ class _homepageState extends State<homepage> {
                                       return const Text('');
                                     }
                                     final int stepsCount = int.tryParse(lastEntry.steps) ?? 0; //convert string to int
-                                    final int hourCount = int.tryParse(lastEntry.hours) ?? 0;
+                                    final double hourCount = double.tryParse(lastEntry.hours) ?? 0;
 
                                     final double stepPercentage = (stepsCount / dailyLimit); //percentage a convert korbe
                                     final double hourPercentage = (hourCount/ dailyHourlimit);
-                                    final double CBPercentage = ((stepsCount*0.04)/CBlimit);
+                                    final double CBPercentage = ((stepsCount*0.04)/CBlimit); //calory burn
 
-                                    // percentage widget
+                                    // return percentage widget
                                     return ConcentricProgressIndicator(
                                       outermostRadius: 60.0,
                                       lineWidth: 10.0,
@@ -223,9 +223,10 @@ class _homepageState extends State<homepage> {
               ),
 
 
-              //30% screen--------***
+              //20% screen--------***
               Expanded(
-                  flex: 30,
+
+                  flex: 20,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Container(
@@ -235,20 +236,41 @@ class _homepageState extends State<homepage> {
                           borderRadius: BorderRadius.circular(20),
                         ),
 
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Icon(Icons.map,size: 40,),
-                              Text("Walking is the best possible exercise.")
-                            ],
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // call data provider here from other page
+                            Consumer<DataProvider>(
+                              builder: (context, userProvider, child) {
+                                final lastEntry = userProvider.lastData;
+
+                                // Handle empty list state
+                                if (lastEntry == null) {
+                                  return const Text('No entries found.');
+                                }
+                                final int stepsCount = int.tryParse(lastEntry.steps) ?? 0;
+                                final double calburn = stepsCount*0.04;
+
+                                return Row(
+                                  children: [
+                                    if(stepsCount >= dailyLimit && calburn >= CBlimit )...[
+                                      Icon(Icons.run_circle_outlined,size: 40,color: Colors.green,),
+                                      Text("Complete"),
+                                    ]
+                                    else...[
+                                      Icon(Icons.run_circle_outlined,size: 40,color: Colors.red,),
+                                      Text("incomplete"),
+                                    ]
+
+                                  ],
+                                );
+                              },
+                            ),
+                          ],
                         )
                     ),
                   )
               )
-
-
             ]
         ),
       ),
