@@ -35,7 +35,7 @@ class animition_widget extends StatelessWidget {
 
               final double stepPercentage = (stepsCount / dailyStepsLimit); //percentage a convert korbe
               final double hourPercentage = (hourCount/ dailyHourlimit);
-              final double CBPercentage = ((stepsCount*0.04)/CBlimit); //calory burn
+              final double CBPercentage = ((stepsCount*0.04)/CBlimit);  //calory burn
 
               // return percentage widget
               return ConcentricProgressIndicator(
