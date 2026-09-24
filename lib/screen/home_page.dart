@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../application/animition_widget.dart';
 import '../application/circle_widget.dart';
-import '../application/dailyGoad_widget.dart';
+import '../application/dailyGoal_widget.dart';
 import '../application/user_data.dart';
 
 class homepage extends StatefulWidget {
