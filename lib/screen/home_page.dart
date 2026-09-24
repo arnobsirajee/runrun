@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../application/circle_widget.dart';
+import '../application/dailyGoad_widget.dart';
 import '../application/user_data.dart';
 
 class homepage extends StatefulWidget {
@@ -59,7 +60,7 @@ class _homepageState extends State<homepage> {
                                           return const Text('0',style: TextStyle(fontSize: 60,fontWeight: FontWeight.w700,color: Color(0xff34446f)),);
                                         }
                                         final int stepsCount = int.tryParse(lastEntry.steps) ?? 0; //convert string to int
-                                        final double stepPercentage = (stepsCount / 6000) * 100; //percentage a convert korbe
+                                        final double stepPercentage = (stepsCount / dailyStepsLimit) * 100; //percentage a convert korbe
 
                                         return Text(
                                           '${stepPercentage.ceil()}',  //ceiling function
@@ -163,6 +164,11 @@ class _homepageState extends State<homepage> {
                                   ],
                                 ),
 
+                                // goal set ....
+                                SizedBox(height: 20,),
+
+                                dailyGoad_widget(),
+
                               ],
                             ),
                           ),
@@ -191,7 +197,7 @@ class _homepageState extends State<homepage> {
                                     final int stepsCount = int.tryParse(lastEntry.steps) ?? 0; //convert string to int
                                     final double hourCount = double.tryParse(lastEntry.hours) ?? 0;
 
-                                    final double stepPercentage = (stepsCount / dailyLimit); //percentage a convert korbe
+                                    final double stepPercentage = (stepsCount / dailyStepsLimit); //percentage a convert korbe
                                     final double hourPercentage = (hourCount/ dailyHourlimit);
                                     final double CBPercentage = ((stepsCount*0.04)/CBlimit); //calory burn
 
@@ -253,7 +259,7 @@ class _homepageState extends State<homepage> {
 
                                 return Row(
                                   children: [
-                                    if(stepsCount >= dailyLimit && calburn >= CBlimit )...[
+                                    if(stepsCount >= dailyStepsLimit && calburn >= CBlimit )...[
                                       Icon(Icons.run_circle_outlined,size: 40,color: Colors.green,),
                                       Text("Complete"),
                                     ]
@@ -277,3 +283,5 @@ class _homepageState extends State<homepage> {
     );
   }
 }
+
+

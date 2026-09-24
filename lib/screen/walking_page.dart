@@ -15,6 +15,7 @@ class _walkingState extends State<walking> {
 
   final TextEditingController _stepsController = TextEditingController();
   final TextEditingController _hourController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class _walkingState extends State<walking> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // TextField to capture input
+            // TextField to step input
             TextField(
               controller: _stepsController,
               decoration: const InputDecoration(
@@ -38,7 +39,7 @@ class _walkingState extends State<walking> {
             ),
 
             SizedBox(height: 20,),
-
+            // TextField to Hour input
             TextField(
               controller: _hourController,
               decoration: const InputDecoration(
@@ -47,21 +48,53 @@ class _walkingState extends State<walking> {
               ),
             ),
 
+            SizedBox(height: 20,),
+            // TextField to date input
+            TextField(
+              controller: _dateController,
+              decoration: const InputDecoration(
+                labelText: 'Select Date',
+                suffixIcon: Icon(Icons.calendar_today),
+                border: OutlineInputBorder(),
+              ),
+              onTap: () async {
+                DateTime? pickedDate = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2100),
+                );
+
+                if (pickedDate != null) {
+                  String formattedDate =
+                  "${pickedDate.toLocal()}".split(' ')[0];
+                  setState(() {
+                    _dateController.text = formattedDate;
+                  });
+                }
+              },
+            ),
+
+
 
             const SizedBox(height: 16),
 
             // Button to trigger the state change
             ElevatedButton(
               onPressed: () {
-                final name = _stepsController.text;
-                final phone = _hourController.text;
+                final steps = _stepsController.text;
+                final hours = _hourController.text;
+                final date = _dateController.text;
 
-                if (name.isNotEmpty && phone.isNotEmpty) {
+                if (steps.isNotEmpty && hours.isNotEmpty && date.isNotEmpty) {
                   // Add new entry to the list in Provider
-                  context.read<DataProvider>().addUser(name, phone);
+                  context.read<DataProvider>().addUser(steps, hours, date);
+
 
                   _stepsController.clear();
                   _hourController.clear();
+                  _dateController.clear();
+
                 }
               },
               child: const Text('Add Data'),
@@ -101,6 +134,12 @@ class _walkingState extends State<walking> {
                             'Hours: ${lastEntry.hours}',
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
+
+                          Text(
+                            'Date: ${lastEntry.date}',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+
                         ],
                       ),
                     ),

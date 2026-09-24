@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final double dailyLimit = 6000; // change korte hobe
+final double dailyStepsLimit = 8000; // change korte hobe
 final double dailyHourlimit =4;
 final double CBlimit =300;
 
@@ -12,12 +12,15 @@ final double CBlimit =300;
 class UserItems {
   final String steps;
   final String hours;
+  final String date;
 
-  UserItems({required this.steps, required this.hours});
+
+  UserItems({required this.steps, required this.hours, required this.date});
   //data_store_method 1  ( Convert UserItem to Map/JSON )
   Map<String, dynamic> toJson() =>{
     'steps' : steps,
     'hours' : hours,
+    'date' : date,
   };
 
   //data_store_method 2 (Create UserItem from Map/JSON)
@@ -25,10 +28,12 @@ class UserItems {
     return UserItems(
       steps: json['steps'] ?? '',
       hours: json['hours'] ?? '',
+      date: json['date'] ?? '',
     );
   }
 
 }
+
 
 class DataProvider extends ChangeNotifier{
   //1. (provider) ( Private list to store items)
@@ -59,8 +64,8 @@ class DataProvider extends ChangeNotifier{
   }
 
   // 3.(provider) Action to add a new item
-  void addUser(String steps, String hours) {
-    _userList.add(UserItems(steps: steps, hours: hours));
+  void addUser(String steps, String hours, String date) {
+    _userList.add(UserItems(steps: steps, hours: hours, date: date));
     notifyListeners(); // Triggers UI update across listening widgets
     _saveToPrefs(); //data_store_method 5
 
@@ -82,3 +87,4 @@ class DataProvider extends ChangeNotifier{
 
 
 }
+

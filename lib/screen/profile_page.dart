@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
 import '../application/user_data.dart';
 
 class userProfile extends StatefulWidget {
@@ -20,6 +21,7 @@ class _userProfileState extends State<userProfile> {
 
       body: Column(
         children: [
+
           // call data provider here from other page
           Consumer<DataProvider>(
             builder: (context, userProvider, child) {
@@ -37,6 +39,7 @@ class _userProfileState extends State<userProfile> {
               );
             },
           ),
+
         ],
       )
     );

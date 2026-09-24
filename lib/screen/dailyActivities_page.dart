@@ -30,10 +30,37 @@ class _dailyActivitiesState extends State<dailyActivities> {
             itemCount: users.length,
             itemBuilder: (context, index) {
               final user = users[index];
+
               return ListTile(
-                leading: const Icon(Icons.person),
-                title: Text(user.steps),
-                subtitle: Text(user.hours),
+                leading: const Icon(Icons.history),
+                title: Row(
+                  children: [
+                    Icon(Icons.directions_run,size: 14,),
+                    SizedBox(width: 10,),
+                    Text(user.steps,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w700),)
+                  ],
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.timer,size: 12,),
+                        SizedBox(width: 10,),
+                        Text(user.hours,style: TextStyle(fontSize: 12),),
+                        Text(" hour",style:TextStyle(fontSize: 12),),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Icon(Icons.date_range,size: 14,),
+                        SizedBox(width: 10,),
+                        Text(user.date,style: TextStyle(fontSize: 12),),
+                      ],
+                    ),
+                  ],
+                ),
                 trailing: IconButton(
                   icon: const Icon(Icons.delete, color: Colors.red),
                   onPressed: () {
