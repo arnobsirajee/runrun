@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../application/user_data.dart';
 
-class dailyActivities extends StatefulWidget {
-  const dailyActivities({super.key});
+class historyPage extends StatefulWidget {
+  const historyPage({super.key});
 
   @override
-  State<dailyActivities> createState() => _dailyActivitiesState();
+  State<historyPage> createState() => _historyPageState();
 }
 
-class _dailyActivitiesState extends State<dailyActivities> {
+class _historyPageState extends State<historyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

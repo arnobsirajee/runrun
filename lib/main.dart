@@ -8,6 +8,8 @@ void main() {
 
   runApp(
 
+    //ChangeNotifierProvider data management er jonno use kore, global variable
+
     ChangeNotifierProvider(create: ((context) => DataProvider()..loadFromPrefs()),
 
       child: const RunRun(),

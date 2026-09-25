@@ -4,14 +4,14 @@ import 'package:provider/provider.dart';
 import '../application/circle_widget.dart';
 import '../application/user_data.dart';
 
-class walking extends StatefulWidget {
-  const walking({super.key});
+class dailyActivity extends StatefulWidget {
+  const dailyActivity({super.key});
 
   @override
-  State<walking> createState() => _walkingState();
+  State<dailyActivity> createState() => _dailyActivityState();
 }
 
-class _walkingState extends State<walking> {
+class _dailyActivityState extends State<dailyActivity> {
 
   final TextEditingController _stepsController = TextEditingController();
   final TextEditingController _hourController = TextEditingController();
@@ -32,30 +32,36 @@ class _walkingState extends State<walking> {
             // TextField to step input
             TextField(
               controller: _stepsController,
-              decoration: const InputDecoration(
-                labelText: 'Enter your Steps Number',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: 'Steps Number',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
               ),
             ),
 
-            SizedBox(height: 20,),
+            SizedBox(height: 10,),
             // TextField to Hour input
             TextField(
               controller: _hourController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Enter Hours',
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
               ),
             ),
 
-            SizedBox(height: 20,),
+            SizedBox(height: 10,),
             // TextField to date input
             TextField(
               controller: _dateController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Select Date',
                 suffixIcon: Icon(Icons.calendar_today),
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
               ),
               onTap: () async {
                 DateTime? pickedDate = await showDatePicker(
@@ -97,7 +103,8 @@ class _walkingState extends State<walking> {
 
                 }
               },
-              child: const Text('Add Data'),
+
+                child: const Text('Add Data'),
             ),
 
             const SizedBox(height: 20),
@@ -117,6 +124,8 @@ class _walkingState extends State<walking> {
                   }
 
                   return Card(
+                    elevation: 0,
+                    color: Color(0xfffcf6f0),
                     margin: const EdgeInsets.all(16.0),
                     child: Padding(
                       padding: const EdgeInsets.all(24.0),

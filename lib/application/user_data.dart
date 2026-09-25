@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final double dailyStepsLimit = 8000; // change korte hobe
+final double dailyStepsLimit = 8000;
 final double dailyHourlimit =4;
 final double CBlimit =300;
-
+double bmiCheck =0;
 
 
 // model class for items

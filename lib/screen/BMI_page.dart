@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-
+import '../application/meter_widget.dart';
 import '../application/user_data.dart';
 
 class bmi_check extends StatefulWidget {
@@ -18,7 +17,8 @@ class _bmi_checkState extends State<bmi_check> {
 
   final _formKey = GlobalKey<FormState>();
 
-  double bmiCheck =0;
+  String? _displayGender = "None selected";
+
 
   void _calculateBMI() {
     // double.tryParse converts the text to a number safely.
@@ -85,6 +85,7 @@ class _bmi_checkState extends State<bmi_check> {
                           controller: _ageController,
                           decoration: InputDecoration(
                             labelText: 'Age',
+                            labelStyle: TextStyle(fontSize: 12),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -103,6 +104,7 @@ class _bmi_checkState extends State<bmi_check> {
                           controller: _weightController,
                           decoration: InputDecoration(
                             labelText: 'Weight (KG)',
+                              labelStyle: TextStyle(fontSize: 12),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -121,6 +123,7 @@ class _bmi_checkState extends State<bmi_check> {
                           controller: _heightController,
                           decoration: InputDecoration(
                             labelText: 'Height (m)',
+                            labelStyle: TextStyle(fontSize: 12),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -160,11 +163,15 @@ class _bmi_checkState extends State<bmi_check> {
                         // ONLY executes if every field passes the validator check
                         _calculateBMI();
 
-                        _ageController.clear();
-                        _weightController.clear();
-                        _heightController.clear();
-                        _selectedGender = null; //reset radio button after submit value
-                        FocusScope.of(context).unfocus();
+                        setState(() {
+                          _displayGender = _selectedGender;
+                          _ageController.clear();
+                          _weightController.clear();
+                          _heightController.clear();
+                          _selectedGender = null; //reset radio button after submit value
+                          FocusScope.of(context).unfocus();
+
+                        });
                       }
                     },
                     child: const Text('Check'),
@@ -180,13 +187,47 @@ class _bmi_checkState extends State<bmi_check> {
             Text("YOUR BMI", style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
 
             Text(
-              'Selected: ${_selectedGender ?? "None selected"}',
+              'Gender: $_displayGender ',
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
-            
-            Text('BMI: ${bmiCheck.toStringAsFixed(2)}',)
+
+            Text('BMI: ${bmiCheck.toStringAsFixed(2)}',),
+
+            if (bmiCheck == 0)
+              const Text('__')
+
+            else if (bmiCheck < 18.5 )
+              const Text('Under Weight',style: TextStyle(color: Colors.red),)
+
+            else if (bmiCheck >= 18.5 && bmiCheck <= 25 )
+                const Text('Normal Weight',style: TextStyle(color: Colors.green),)
+
+              else if (bmiCheck > 25 && bmiCheck <= 30 )
+                  const Text('Over Weight',style: TextStyle(color: Colors.yellow),)
+
+                else if (bmiCheck > 30 && bmiCheck <= 35 )
+                    const Text('Over Weight',style: TextStyle(color: Colors.orangeAccent),)
+            else
+              const Text('Obesity',style: TextStyle(color: Colors.red),),
 
 
+
+            SizedBox(height: 20,),
+
+            //meter_widget
+            meter_widget(),
+
+            SizedBox(height: 20,),
+
+            //ElevatedButton(
+             // child: const Text('Go to Next Page'),
+              //onPressed: () {
+               // Navigator.push(
+                 // context,
+                 // MaterialPageRoute(builder: (context) => const TestPage()),
+               // );
+             // },
+           // )
 
           ],
         ),
@@ -194,3 +235,5 @@ class _bmi_checkState extends State<bmi_check> {
     );
   }
 }
+
+

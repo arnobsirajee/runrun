@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../application/animition_widget.dart';
-import '../application/circle_widget.dart';
 import '../application/dailyGoal_widget.dart';
 import '../application/user_data.dart';
 
@@ -215,11 +213,11 @@ class _homepageState extends State<homepage> {
                                   children: [
                                     if(stepsCount >= dailyStepsLimit && calburn >= CBlimit )...[
                                       Icon(Icons.run_circle_outlined,size: 40,color: Colors.green,),
-                                      Text("Complete"),
+                                      Text("Complete daily goal!",style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
                                     ]
                                     else...[
                                       Icon(Icons.run_circle_outlined,size: 40,color: Colors.red,),
-                                      Text("incomplete"),
+                                      Text("incomplete daily goal!", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
                                     ]
 
                                   ],

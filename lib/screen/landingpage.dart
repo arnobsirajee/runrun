@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:runrun/screen/BMI_page.dart';
-import 'package:runrun/screen/walking_page.dart';
-import 'dailyActivities_page.dart';
+import 'package:runrun/screen/daily_Activity.dart';
+import 'history_page.dart';
 import 'home_page.dart';
 
 class landingPage extends StatefulWidget {
@@ -24,8 +24,8 @@ class _landingPageState extends State<landingPage> {
 
   final List<Widget> _pages = [
     homepage(),
-    dailyActivities(),
-    walking(),
+    historyPage(),
+    dailyActivity(),
     bmi_check(),
 
   ];
@@ -53,8 +53,8 @@ class _landingPageState extends State<landingPage> {
 
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.access_time_outlined), label: "Daily Activity"),
-            BottomNavigationBarItem(icon: Icon(Icons.directions_run), label: "Walking"),
+            BottomNavigationBarItem(icon: Icon(Icons.access_time_outlined), label: "History"),
+            BottomNavigationBarItem(icon: Icon(Icons.directions_run), label: "Daily Activity"),
             BottomNavigationBarItem(icon: Icon(Icons.calculate_outlined), label: "BMI"),
 
           ]
