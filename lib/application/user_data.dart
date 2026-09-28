@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final double dailyStepsLimit = 8000;
-final double dailyHourlimit =4;
-final double CBlimit =300;
+double dailyStepsLimit = 8000;
+double dailyHourlimit =4;
+double CBlimit =300;
 double bmiCheck =0;
 
 

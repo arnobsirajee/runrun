@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:runrun/screen/set_dailyLimit.dart';
 import '../application/circle_widget.dart';
 import '../application/user_data.dart';
 
@@ -148,13 +149,22 @@ class _dailyActivityState extends State<dailyActivity> {
                             'Date: ${lastEntry.date}',
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
-
                         ],
                       ),
                     ),
                   );
                 },
               ),
+            ),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SetLimit()),
+                );
+              },
+              child: const Text('Change daily goal'),
             ),
 
           ],
